@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" type="x-icon" href="dna-svgrepo-com.svg">
+    <title>Login</title>
+</head>
+<body>
+    <div class="Docking-header mx-auto">
+        <div class=" center content-between ">
+            <div  style="margin-top:1rem;">
+                <h1 style="color: white;">Moleculer Docking System</h1>
+                <h6 style="color: white;">Virtual Screening Server</h6>
+            </div>
+            <div style="display: flex;">
+            <img class="align-self-center" src="dna-svgrepo-com.svg" height="65px" alt="">
+        </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg bg-grad center">
+        <div class="container-fluid">
+      
+          <div class="collapse navbar-collapse " id="navbarSupportedContent" >
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active me-5" aria-current="page" href="home.html" style="color: white;"><h5>Home</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-5" href="receptorbased.html" style="color: white;"><h5>Receptor-based Screen</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-5" href="ligandbased.html" style="color: white;"><h5>Ligand-based Screen</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="help.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                 <h5> Help</h5>
+                </a>
+       
+              </li>
+     
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a  class="nav-link me-5" href="register.php" style="color: white;"> <h5>Register</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="login.html" style="color: white;"> <h5>Login</h5> </a>
+                </li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+
+      <div class="container mt-5">
+        <form id="signin-form text-white " class="row g-3" >
+          <h2 style="color: white;">Sign In</h2>
+          <div class="col-md-12 form-group me-5" style="color: white;">
+            <label for="email">Email:</label>
+            <input type="email"  class="form-control" id="email" name="email" required>
+          </div>
+          <div class=" col-md-12  me-5" style="color: white;">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="col-md-12">
+          <button type="submit" class="btn btn-primary">Sign In</button>
+          </div>
+          <a href="#" id="forgot-password-link" style="color: white;">Forgot Password?</a>
+        </form>
+        <div id="forgot-password-form" class="d-none mt-4 me-5">
+          <h2>Forgot Password</h2>
+          <p>Enter your email address to reset your password:</p>
+          <div class="form-group">
+            <input type="email" class="form-control" id="forgot-email" name="forgot-email" required>
+          </div>
+          <button type="button" id="reset-password-btn" class="btn btn-primary mt-2">Reset Password</button>
+          <a href="#" id="back-to-login-link">Back to Login</a>
+        </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="script.js"></script>  
+      
+
+
+      <div class="footer-dark mt-2">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Institute</h3>
+                        <ul>
+                            <li><a href="#">Sapienza University</a></li>
+                            <li><a href="#">Tovelo University</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Chemistry Databases</h3>
+                        <ul>
+                            <li><a href="#">BindingDB</a></li>
+                            <li><a href="#">ChEMBL</a></li>
+                            <li><a href="#">DrugBank</a></li>
+                            <li><a href="#">PubChem</a></li>
+                            <li><a href="#">ZINC</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Protein Databases</h3>
+                        <ul>
+                            <li><a href="#">Protein Data Bank RCSB</a></li>
+                            <li><a href="#">PDBe</a></li>
+                            <li><a href="#">PDBj</a></li>
+                            <li><a href="#">PDBsum</a></li>
+                        </ul>
+                    </div>
+               
+                  
+                </div>
+                <p class="copyright">Merve © 2023</p>
+            </div>
+        </footer>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" type="x-icon" href="dna-svgrepo-com.svg">
+    <title>Ligand Based page</title>
+</head>
+<body style="background-color: aliceblue;">
+    
+    <div class="Docking-header mx-auto">
+        <div class=" center content-between ">
+            <div  style="margin-top:1rem;">
+                <h1 style="color: white;">Moleculer Docking System</h1>
+                <h6 style="color: white;">Virtual Screening Server</h6>
+            </div>
+            <div style="display: flex;">
+            <img class="align-self-center" src="dna-svgrepo-com.svg" height="65px" alt="">
+        </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg bg-grad center " style="border-radius: 20px;">
+        <div class="container-fluid">
+      
+          <div class="collapse navbar-collapse " id="navbarSupportedContent" >
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active me-5" aria-current="page" href="home.html" style="color: white;"><h5>Home</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-5" href="receptorbased.html" style="color: white;"><h5>Receptor-based Screen</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-5" href="ligandbased.html" style="color: white;"><h5>Ligand-based Screen</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="help.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                 <h5> Help</h5>
+                </a>
+       
+              </li>
+     
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a  class="nav-link me-5" href="login.html" style="color: white;"> <h5>Register</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="login.html" style="color: white;"> <h5>Login</h5> </a>
+                </li>
+            </ul>
+
+          </div>
+        </div>
+    </nav>
+    <div class="container" style="max-width:1800px;background-color: aliceblue;">
+        <div class="card border-0 mt-4"> 
+            <h5>
+                <strong>Receptor-based Screen</strong>
+                <span id="example-flag">
+                    <a class="btn example-button" role="button" href="screenresult_dock.php?example" target="_blank">
+                   example</a>
+                </span>
+            </h5>
+            <p>
+                Receptor-based Screen predicts the possible binding pockets using 3D structures of receptor, and performs high-throughput docking with the user-selected drug library. 
+            </p>
+    
+            
+            <div class="form-row">  <!-- protein -->
+                <div class="col-md-6 mb-4" id="enterID">
+                    <form class="form-control border-0 p-0" action="" method="post">
+                        <label for="pdb_id">
+                            <strong>Please enter PDB id:</strong>
+                            <span>
+                                <sup><a href="#" data-toggle="tooltip" data-html="true" style="color: #495057;text-decoration: underline dashed;" title="" data-original-title="<p align='left'>We obtained 17652 proteins and their ligands from PDBbind database, you can only enter PDB ID of the protein receptor to do the job.</p>">
+                                    &nbsp;instruction</a>
+                                </sup>
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" id="pdb_id" name="pdb_id" oninput="idIfExisted(this.value)">
+                        <input type="text" style="display:none">
+                        <div class="form-text text-muted" id="id_info">
+                            <small>
+                                e.g. 3LBJ, 3lbj
+                            </small>
+                        </div>
+                        <div class="form-text text-danger" id="id_not_existed" style="display: none">
+                            <small>
+                                The PDB id isn't existed in database.&nbsp;&nbsp;Please enter again or upload the file.
+                            </small>
+                        </div>
+                        <div class="form-text text-danger" id="id_more4" style="display: none">
+                            <small>
+                                The length of the id string cannot be greater than 4!
+                            </small>
+                        </div>
+                        <div id="response"></div>
+                    </form> <!-- enter pdb id -->
+                </div>
+                <div class="col-md-6 mb-4 mt-4 my-4" id="uploadFile">
+                    <form class="form-control border-0 p-0" action="" method="post">
+                        <label for="input-protein">
+                            <span style="font-size:150%; line-height:0px;" id="orLabel"><strong>Or, </strong></span>
+                            <strong>upload protein file:</strong>
+                        </label>
+                        <div class="input-group mb-3 my-3">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="protein_file" name="protein_file" accept=".pdb">
+                                <label class="custom-file-label" for="protein_file" id="protein_file-label">Select a protein file (pdb format)</label>
+                            </div>
+                            <div class="input-group-append" id="protein_file-span" style="display: none">
+                                <span class="input-group-text">Remove</span>
+                            </div>
+                        </div>
+                        <div class="progress my-3" id="protein_progress_bar" style="display:none; width:150px">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="protein_bar"></div>
+                        </div>
+                        <span id="protein_precent"></span>
+                           
+                        <small id="input-protein-error" style="display: none" class="text-danger">
+                            Invalid file extension for file. Only "pdb" files are supported.</small>
+                        <small id="input-protein-nofile" style="display: none" class="text-danger">
+                            Please choose a input protein file</small>
+                        <small id="input-protein-nameErr" style="display: none" class="text-danger">
+                            Invalid file name for file. Please do not include spaces in the file name.</small>
+                        <small id="input-protein-file-size" style="display: none" class="text-danger"></small>
+                    </form> <!-- upload protein file -->
+                </div>
+            </div> 
+            <div class="mb-4">
+                <form id="dock" enctype="multipart/form-data" class="form-control border-0 p-0" method="post" action="screen_blinddock.php" novalidate=""> <!-- More parameters -->
+                    <div class="mb-2 my-3 mx-3">
+                        <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#more-param" role="button" aria-expanded="false" aria-controls="more" id="more-param-btn">
+                         <strong>More parameters</strong>
+                        </a>
+                    </div>
+                    <div class="collapse" id="more-param">
+                        <div>
+                            
+                                <label for="pocket_number">Please enter the number of cavities to inspect:</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="pocket-number" name="pocket_number" value="5" onfocus="if (value =='5'){value =''}" onblur="if (value ==''){value='5'}" placesholder="pocket number" required="">
+                                    <input type="text" style="display:none">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" onclick="def()">Default</span>
+                                    </div>
+                                </div> 
+                                <small class="text-danger" id="pocket-number-error" style="display: none">
+                                    Please enter a number smaller than 20
+                                </small>  <!-- pocket-number -->
+                            
+                        </div>   
+                    </div></form>
+                
+            </div> 
+           
+            <form enctype="multipart/form-data" method="post" action="dock.php" novalidate=""><!-- submit -->
+                <div class="d-flex flex-wrap justify-content-center" style="margin-top:1em;" id="butt_submit">
+                    <button type="button" name="submit" class="btn btn-primary" id="submit" disabled="true">Detect Binding Pockets</button>
+                </div>
+            </form>
+
+            <div class="card text-center border-0">  
+                <div id="results" class="alert alert-secondary mt-4" role="alert">
+                    <span id="count_time"></span>
+                    <span id="result_txt"> 
+                        Registed users can also get access to their records from their accounts. Please <a href="register.php">register</a> and <a href="login.php">log</a> in.
+                    </span>
+                </div>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+           
+        </div> <!-- card -->
+
+    </div>
+    
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Institute</h3>
+                        <ul>
+                            <li><a href="#">Sapienza University</a></li>
+                            <li><a href="#">Tovelo University</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Chemistry Databases</h3>
+                        <ul>
+                            <li><a href="#">BindingDB</a></li>
+                            <li><a href="#">ChEMBL</a></li>
+                            <li><a href="#">DrugBank</a></li>
+                            <li><a href="#">PubChem</a></li>
+                            <li><a href="#">ZINC</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Protein Databases</h3>
+                        <ul>
+                            <li><a href="#">Protein Data Bank RCSB</a></li>
+                            <li><a href="#">PDBe</a></li>
+                            <li><a href="#">PDBj</a></li>
+                            <li><a href="#">PDBsum</a></li>
+                        </ul>
+                    </div>
+               
+                  
+                </div>
+                <p class="copyright">Merve © 2023</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

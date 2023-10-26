@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" type="x-icon" href="dna-svgrepo-com.svg">
+    <title>Help</title>
+</head>
+<body>
+    <div class="Docking-header mx-auto">
+        <div class=" center content-between ">
+            <div  style="margin-top:1rem;">
+                <h1 style="color: white;">Moleculer Docking System</h1>
+                <h6 style="color: white;">Virtual Screening Server</h6>
+            </div>
+            <div style="display: flex;">
+            <img class="align-self-center" src="dna-svgrepo-com.svg" height="65px" alt="">
+        </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg bg-grad center" style="border-radius: 20px;">
+        <div class="container-fluid">
+      
+          <div class="collapse navbar-collapse " id="navbarSupportedContent" >
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active me-5" aria-current="page" href="home.html" style="color: white;"><h5>Home</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-5" href="receptorbased.html" style="color: white;"><h5>Receptor-based Screen</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-5" href="ligandbased.html" style="color: white;"><h5>Ligand-based Screen</h5></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="help.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                 <h5> Help</h5>
+                </a>
+       
+              </li>
+     
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a  class="nav-link me-5" href="register.php" style="color: white;"> <h5>Register</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="login.html" style="color: white;"> <h5>Login</h5> </a>
+                </li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+
+      <div class="col-12 col-md-9 col-xl-9 pl-md-1 bd-content mt-5 mx-auto">
+        <div class="tab-content pr-2" id="nav-tabContent" style="text-align: justify;">
+
+            <div class="tab-pane fade active show" id="how" role="tabpanel" aria-labelledby="list-how">
+                <h4 style="margin-bottom:1rem;">How it works</h4>
+                <p>
+                    DrugRep provides users two services: 
+                    <a href="#how-dock"><em>Receptor-based Screen</em></a>and <a href="#how-ligand"><em>Ligand-based Screen</em></a>.
+                </p>
+                <div style="text-align:center" class="mb-2 mt-0">
+                    <img class="col-md-9 p-1" src="pipeline-new.png" alt="CB-Dock pipeline">
+                </div>
+                <div id="how-dock">
+                    <h5 class="h5-t">Receptor-based Screen</h5>
+                    <p>
+                        Receptor-based Screen can identify the binding pockets and docking parameters including the grid center coordinates and the sizes of the search space , a curvature-based cavity detection approach issued. In addition, users also can upload ligand that co-crystallize with the receptor for calculating the docking pocket's grid center and box sizes based on  <a href="http://mgltools.scripps.edu/downloads" target="_blank"><em>AutoDockTools</em></a> and <em>eBoxSize</em>. Receptor-based Screen then perform batching docking over drug library using <a href="http://vina.scripps.edu" target="_blank"><em>AutoDock Vina</em></a>. In Receptor-based Screen, users only need to enter a PDB ID or to upload the structure file of a protein receptor to inspect pockets, and then select a pocket to screen after inspecting. 
+                    </p>
+                    <div style="text-align:center" class="mb-2 mt-0">
+                        <img class="col-md-9 p-1" src="ligand-pipeline.png" alt="CB-Dock pipeline">
+                    </div>
+                </div>
+                <div id="how-ligand">
+                    <h5 class="h5-t">Ligand-based Screen</h5>
+                    <p>
+                        Ligand-based Screen offers ligand-similarity based virtual screening methods. For a given active ligand, it can search for compounds with different types of similarity.
+                        
+                    </p>
+                  
+                 
+                         <ul style="margin-bottom: 0.3rem;">
+                            <li>A molecule structure is analysed to identify linear fragments of length from 1-7 atoms. Single atom fragments of C, N, and O are ignored. A fragment is terminated when the atoms form a ring.</li>
+                            <li>For each of these fragments the atoms, bonding and whether they constitute a complete ring is recorded and saved in a set so that there is only one of each fragment type. Chemically identical versions, (i.e. ones with the atoms listed in reverse order and rings listed starting at different atoms) are identified and only a single canonical fragment is retained.</li>
+                            <li>Each remaining fragment is assigned a hash number from 0 to 1020 which is used to set a bit in a 1024 bit vector</li>
+                        </ul>
+                    <p style="margin-bottom:0.3em;">
+                        6. <span class="tag">FP4 :</span>
+                        FP4 uses a series of SMARTS queries stored in <a href="../data/SMARTS_InteLigand.txt" target="_blank" title="Click to view the text file."><em>SMARTS_InteLigand.txt</em></a>
+                    </p>
+                </div>
+                    
+                
+            </div>
+            <div class="tab-pane fade" id="submit" role="tabpanel" aria-labelledby="list-submit">
+                <h4>Submitting a job</h4>
+                <p>
+                    DrugRep provides users two services: 
+                    <a href="#docking-screen"><em>Receptor-based Screen</em></a> and <a href="#ligmate"><em>Ligand-based Screen</em></a>.
+                </p>
+                <div id="docking-screen" class="mb-2">
+                    <h5 class="h5-t">Receptor-based Screen</h5>
+                    <p>
+                        Receptor-based Screen requires the inputs of 
+                        <span class="tag">PDB ID</span> 
+                        or 
+                        <span class="tag">Protein Structure File</span>,
+                        <span class="tag">Pockets Number</span> 
+                        before inspecting pockets. 
+                        It also requires the inputs of 
+                        <span class="tag">Pocket</span>, 
+                        <span class="tag">Library</span>, 
+                        <span class="tag">Output Number</span> 
+                        and 
+                        <span class="tag">Email</span> 
+                        before screening. 
+                    </p>
+                    <img src="../images/submitting-a-job-in-docking-screen-1.png" alt="submitting-a-job-in-docking-screen-2.png" class="img-thumbnail" style="width:100%;display:block; margin:auto;margin-bottom:1rem;">
+                    
+                    <p style="margin-bottom:0.3em;">
+                        1. <span class="tag">PDB ID :</span>
+                        Enter a four-length PDB id containing letters and numbers (e.g. 10gs, 10GS, 5oku, 3LBJ ). If it exists in the PDBbind database, you do not need to enter the second parameter, protein structure file. If it does not exist, you need to enter the second parameter. The parameter is case non-sensitive and alternative.
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        2. <span class="tag">Protein Structure File :</span>
+                        The protein receptor is uploaded in PDB format, and all HETATMs and all solvent molecules should be removed and all hydrogen atoms should be added before uploading. If the first parameter is not entered, the parameter is required.
+                    </p>
+                    <p>
+                        3. <span class="tag">Pockets Number :</span>
+                        The number of pockets. The range of this number is 0 to 20, the default is 5 which can be adjusted.
+                    </p>
+                    <img src="../images/submitting-a-job-in-docking-screen-2.png" alt="submitting-a-job-in-docking-screen-2" class="img-thumbnail" style="width:100%;display:block; margin:auto;margin-bottom:1rem;">
+                    <p style="margin-bottom:0.3em;">
+                        4. <span class="tag">Pocket :</span>
+                        Select a pocket from inspecting-pockets'result. 
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        5. <span class="tag">Library :</span>
+                        Ligand molecular library.
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        6. <span class="tag">Output Number :</span>
+                        The number of output molecules. The range of this number is 0 to 50, the default is 50 which can be adjusted.
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        7. <span class="tag">Ligand File :</span>
+                        This is an optional option for uploading the ligand file that co-crystallizes with the receptor protein. If the user uploads the ligand file, the pocket parameters will be calculated based on the 3D position and size of the ligand, and the pocket selected with the fourth parameter will be invalid. If the uploaded file is incorrect (for example, the ligand and receptor do not originate from a co-crystalline complex), the pocket chosen by the fourth parameter will be used. The ligand is uploaded in MOL2, MOL, SDF, PDB format with 3d structure and all hydrogen atoms should be added before uploading.
+                    </p>
+                    <p>
+                        8. <span class="tag">Email :</span>
+                        The screening work may cost several hours. So you can check the result in your mailbox after a period of time instead of waiting on this page. You don't need to enter this parameter if you are a registered user.
+                    </p>
+                </div>
+
+                <div id="ligmate" class="mb-2">
+                    <h5 class="h5-t">Ligand-based Screen</h5>
+                    <p>
+                        For Ligand-based Screen, the user needs to enter 
+                        <span class="tag">Ligand Structure File</span>, 
+                        <span class="tag">Library</span>, 
+                        <span class="tag">Output Number</span>. 
+                    </p>
+                    <img src="../images/submitting-a-job-in-ligand-screen.png" alt="submitting-a-job-in-ligand-screen" class="img-thumbnail" style="width:100%;display:block; margin:auto;margin-bottom:1rem;">
+                    <p style="margin-bottom:0.3em;">
+                        1. <span class="tag">Ligand Structure File :</span>
+                        The ligand is uploaded in MOL2, MOL, SDF format.
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        2. <span class="tag">Library :</span>
+                        Ligand molecular library.
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        3. <span class="tag">Method :</span>
+                        Similarity searching methods.
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        4. <span class="tag">Output Number :</span>
+                        The number of output molecules. The range of this number is 0 to 50, the default is 10 which can be adjusted.
+                    </p>
+                    <p>
+                        5. <span class="tag">Email :</span>
+                        Your email will be used to receive the screening result. You don't need to enter this parameter if you are a registered user.
+                    </p>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="check" role="tabpanel" aria-labelledby="list-check">
+                <h4>Check the job results</h4>
+                <p>
+                    The especially Receptor-based Screen work may cost several hours. So you can check the result in your mailbox after a period of time instead of waiting on this page. If you are a registered user, you can click your user name in navigation bar to get access to your records.
+                </p>
+                <p>
+                    When a virtual screening is completed, the result can be viewed with abundant information, such as 3D interactive view (using <a href="http://nglviewer.org/" target="_blank"><em>NGL</em></a>), 2D images, the number of hydrogen bond donors, the number of hydrogen bond acceptors, and the number of rotatable bonds, logP and so on.
+                </p>
+
+            </div>
+            <div class="tab-pane fade" id="library" role="tabpanel" aria-labelledby="list-library">
+                <div id="content-library">
+                    <h4>Chemical Library</h4>
+                    <p>
+                        DrugRep offers three drug libraries, including <span class="tag">Approved drug library</span>, <span class="tag">Experimental drug library</span> and <span class="tag">Traditional Chinese Medicine</span>. The first two are from <a href="https://go.drugbank.com/" target="_blank"><em>DrugBank</em></a> database (version 5.1.7); Traditional Chinese Medicine library is from Topscience Company. The latter contains 2390 monomer compounds from nearly 800 traditional Chinese medicines, including various structural types such as flavonoids, alkaloids, terpenoids, and glycosides. Traditional Chinese Medicine library is a powerful library in the fields of anti-cancer, anti-inflammatory, antibacterial, apoptosis, and autophagy research.
+                    </p>
+                    <p>
+                        RDKit and Open Babel are used to construct 3D conformation for drugs without 3D structure. Open Babel is used to convert file formats, including pdbqt format for receptor-based virtual screening, sdf, mol, mol2 format for ligand-based virtual screening, svg format for viewing.
+                    </p>
+                    <p> 
+                        DrugRep deposits the structure files of 11908 protein receptors and their ligands obtained from <a href="http://www.pdbbind.org.cn/" target="_blank"><em>PDBbind</em></a> database. So that users can choose to enter only the PDB ID to complete a virtual screening job for Receptor-based Screen.
+                    </p>
+                    <p style="margin-bottom:0.3em;"> 
+                        <span class="card-link glyphicon glyphicon-circle-arrow-down" href=""></span> Download drug IDs report:
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        1. <a href="../lib/info/all_drug_app.txt" target="_blank">Approved drug IDs</a>
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        2. <a href="../lib/info/all_drug_exp.txt" target="_blank">Experimental drug IDs</a>
+                    </p>
+                    <p style="margin-bottom:0.3em;">
+                        3. <a href="../lib/info/tcmml_info.txt" target="_blank">Traditional Chinese Medicine IDs</a>
+                    </p>
+
+
+        
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="list-contacts">
+                <h4>Contacts</h4>
+                <p>If you have any problems with DrugRep, please contact us at:</p>
+                <ul>
+                    <li><b>Merve Celik</b> :mervelilith1@gmail.com</li>
+
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="issues" role="tabpanel" aria-labelledby="list-issues">
+                <h4>FAQs</h4>
+                <ol>
+                    <li>
+                        <p> 
+                            Browser Compatibility
+                        </p>
+                        <p>
+                            We tested DrugRep using the latest versions of IE, Edge, Firefox, Chrome and Safari. Browser compatibility is shown in the table below.
+                            If you are using one of the before mentioned browsers and you have problems displaying the “Results” page, we recommend you to update your browser to the latest version.
+                            Some browsers may not support WebGL or do not support all WebGL features needed by <a href="https://github.com/arose/ngl/" target="_blank">NGL viewer</a> like Opera.
+                            Please try another browser in the case you get a warning that WebGL is not supported or the example provided by us on the “Results” page is not visible.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <div class="browser-tab">
+                                <table class="table table-bordered" id="browser">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                OS
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img src="../images/compatible_chrome.gif">
+                                                </div>
+                                                Chrome(v96)
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img src="../images/compatible_firefox.gif">
+                                                </div>
+                                                Firefox(v88)
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img src="../images/compatible_edge.png">
+                                                </div>
+                                                Edge(v96)
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <img src="../images/compatible_safari.gif">
+                                                </div>
+                                                Safari
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Linux (ubuntu18)</td>
+                                            <td>
+                                                <span class="correct"></span>
+                                            </td>
+                                            <td>
+                                                <span class="correct"></span>
+                                            </td>
+                                            <td class="td-muted" style="background-color:#dadada5c">
+                                            </td>
+                                            <td class="td-muted" style="background-color:#dadada5c">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Windows10</td>
+                                            <td>
+                                                <span class="correct"></span>
+                                            </td>
+                                            <td>
+                                                <span class="correct"></span>
+                                            </td>
+                                            <td>
+                                                <span class="correct"></span>
+                                            </td>
+                                            <td class="td-muted" style="background-color:#dadada5c">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MacOS</td>
+                                            <td>
+                                                <span class="correct"></span>
+                                            </td>
+                                            <td class="td-muted" style="background-color:#dadada5c">
+
+                                            </td>
+                                            <td class="td-muted" style="background-color:#dadada5c">
+                                            </td>
+                                            <td class="td-muted" style="background-color:#dadada5c">
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <p> 
+                            Why can't I receive the result email ? 
+                        </p>
+                        <p>
+                            The mail may be identified as spam. You may need to check in the trash can and add our account to the whitelist. We will to send you an email only after you submit your job. In addition, you can save your jobs by registering and logging in, so you only need to click on your username in the upper right corner to view your jobs.
+                        </p>
+
+                    </li>
+                    <li>
+                        <p> 
+                            Why does the url in the results email not show the results ? 
+                        </p>
+                        <p>
+                            Your submission may have expired as the server only saves the results for limited days.
+                        </p>
+
+                    </li>
+
+                </ol>                                
+            </div>
+            <div class="tab-pane fade" id="download" role="tabpanel" aria-labelledby="list-download">
+                <h4>Download</h4>
+                <p>We provide a command-line interface for RBS (the receptor-based virtual screening) for Linux.</p>
+                <!-- href="../DrugRep_RBS_download.tar.gz" -->
+                <p><a target="_blank" onclick="recordDown()">DrugRep_RBS_download.tar.gz</a></p>
+                            <p>If you need our software, please gegister or contact cy_scu@yeah.net</p>                                <!-- <p><a  id="software-link" href="" target="_blank">DrugRep_RBS_download.tar.gz</a></p>
+                <p id="software">If you need our software, feel free to contact cy_scu@yeah.net</p> -->
+            </div>
+      
+        </div>
+    </div>
+
+        
+<div class="footer-dark mt-4">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 item">
+                    <h3>Institute</h3>
+                    <ul>
+                        <li><a href="#">Sapienza University</a></li>
+                        <li><a href="#">Tovelo University</a></li>
+                        <li><a href="#">Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-4 item">
+                    <h3>Chemistry Databases</h3>
+                    <ul>
+                        <li><a href="#">BindingDB</a></li>
+                        <li><a href="#">ChEMBL</a></li>
+                        <li><a href="#">DrugBank</a></li>
+                        <li><a href="#">PubChem</a></li>
+                        <li><a href="#">ZINC</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-4 item">
+                    <h3>Protein Databases</h3>
+                    <ul>
+                        <li><a href="#">Protein Data Bank RCSB</a></li>
+                        <li><a href="#">PDBe</a></li>
+                        <li><a href="#">PDBj</a></li>
+                        <li><a href="#">PDBsum</a></li>
+                    </ul>
+                </div>
+           
+              
+            </div>
+            <p class="copyright">Merve © 2023</p>
+        </div>
+    </footer>
+  </div>
+  
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="script.js"></script>
+</body>
+<style>
+    
+</style>
+</html>

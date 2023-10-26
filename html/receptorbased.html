@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" type="x-icon" href="dna-svgrepo-com.svg">
+    <title>Ligand Based page</title>
+</head>
+<body style="color: aliceblue;">
+    
+    <div class="Docking-header mx-auto">
+        <div class=" center content-between ">
+            <div  style="margin-top:1rem;">
+                <h1 style="color: white;">Moleculer Docking System</h1>
+                <h6 style="color: white;">Virtual Screening Server</h6>
+            </div>
+            <div style="display: flex;">
+            <img class="align-self-center" src="dna-svgrepo-com.svg" height="65px" alt="">
+        </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg bg-grad center">
+      <div class="container-fluid">
+    
+        <div class="collapse navbar-collapse " id="navbarSupportedContent" >
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active me-5" aria-current="page" href="home.html" style="color: white;"><h5>Home</h5></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link me-5" href="receptorbased.html" style="color: white;"><h5>Receptor-based Screen</h5></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link me-5" href="ligandbased.html" style="color: white;"><h5>Ligand-based Screen</h5></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="help.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+               <h5> Help</h5>
+              </a>
+     
+            </li>
+   
+          </ul>
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a  class="nav-link me-5" href="register.php" style="color: white;"> <h5>Register</h5></a>
+              </li>
+              <li class="nav-item">
+                  <a  class="nav-link" href="login.html" style="color: white;"> <h5>Login</h5> </a>
+              </li>
+          </ul>
+
+        </div>
+      </div>
+  </nav>
+    <div class="container" style="max-width :1200px;background-color: aliceblue;">
+      <div class="card border-0 mt-4"> 
+          <h5>
+              <strong>Ligand-based Screen</strong>
+              <span id="example-flag">
+                  <a class="btn example-button" role="button" href="ligmate_result2.php?example" target="_blank">
+                 example</a>
+              </span>
+          </h5>
+          <p>
+               Ligand-based Screen predicts the new function of old drugs by  comparing the  similarities between the user-selected drug library and the uploaded active compound. 
+          </p>
+          <form class="form-control border-0 p-0 mb-4"> <!-- ligand -->
+              <label for="input-ligand"><strong>Please enter query ligand:</strong></label>
+              <div class="input-group"> 
+                  <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="ligand_file" name="ligand_file" accept=".mol2, .mol, .sdf">
+                      <label class="custom-file-label" for="ligand_file" id="ligand_file-label">
+                          Select a ligand file (mol2,mol,sdf format)
+                      </label>
+                  </div>
+                  <div class="input-group-append" id="ligand_file-span" style="display: none">
+                      <span class="input-group-text">Remove</span>
+                  </div>
+              </div>
+              <div class="progress" id="ligand_progress_bar" style="display:none; width:150px">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="ligand_bar"></div>
+              </div>
+              <span id="ligand_precent"></span>
+                      
+              <small id="input-ligand-error" style="display: none" class="text-danger">
+                  Invalid file extension for file. Only "mol2" files are supported.</small>
+              <small id="input-ligand-nofile" style="display: none" class="text-danger">
+                  Please choose a input ligand file</small>
+              <small id="input-ligand-nameErr" style="display: none" class="text-danger">
+                  Invalid file name for file. Please do not include spaces in the file name.</small>
+              <small id="input-ligand-file-size" style="display: none" class="text-danger"></small>
+          </form>
+          <form class="form-control border-0 p-0 mb-4">  <!-- Library -->
+              <label for="input-ligand">
+                  <strong>Select molecular library:</strong>
+                  <span>
+                      <sup>
+                          <a href="help.php#library" title="Link to help page about library." style="color: #495057; text-decoration: underline dashed;" target="_blank">
+                          &nbsp;instruction</a>
+                      </sup>
+                  </span>
+              </label>
+              <div id="library-radios">
+                  <label class="radio-label" style="margin-left: 0;"> 
+                      <input type="radio" name="library-radio" id="library-radio" value="app" checked="">
+                      Approved drug library<!-- (2315) -->
+                  </label>
+                  <label class="radio-label"> 
+                      <input type="radio" name="library-radio" id="library-radio" value="exp">
+                      Experimental drug library<!-- (5915) -->
+                  </label>
+                  <label class="radio-label" id="radio-biolip-bak" style="display: none"> 
+                      <input type="radio" name="library-radio" id="library-radio" value="biolip">
+                      Compounds Binding with Human Proteins<!-- (15915) -->
+                  </label>
+                  <label class="radio-label" style="display: none"> 
+                      <input type="radio" name="library-radio" id="library-radio" value="yourLib">
+                      Your Library
+                  </label>
+              </div>
+              <div id="library-upload" style="display: none">
+                    <!-- Your Library -->
+                      <div class="input-group">
+                          <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="library_file" name="library_file" accept=".sdf">
+                              <label class="custom-file-label" for="library_file" id="library_file-label">Upload your library (sdf format, 3D conformation)</label>
+                          </div>
+                          <div class="input-group-append" id="library_file-span" style="display: none">
+                              <span class="input-group-text">Remove</span>
+                          </div>
+                      </div>
+                      <div class="progress" id="library_progress_bar" style="display:none; width:150px">
+                          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="library_bar"></div>
+                      </div>
+                      <span id="library_precent"></span>
+                      <small id="input-library-error" style="display: none" class="text-danger">
+                          Invalid file extension for file. Only "sdf" files are supported.</small>
+                      <small id="input-library-nofile" style="display: none" class="text-danger">
+                          Please choose a input library file</small>
+                      <small id="input-library-nameErr" style="display: none" class="text-danger">
+                          Invalid file name for file. Please do not include spaces in the file name.</small>
+                      <small id="input-library-file-size" style="display: none" class="text-danger"></small>
+                  
+              </div></form>
+          
+          <form class="form-control border-0 p-0 mb-4">  <!-- method -->
+              <label for="input-ligand">
+                  <strong>Select method:</strong>
+                  <span>
+                      <sup>
+                          <a href="help.php#how#how-ligand" title="Link to help page about methods of Ligand-based Screen." target="_blank" style="color: #495057;text-decoration: underline dashed;">
+                          &nbsp;instruction</a>
+                      </sup>
+                  </span>
+              </label>
+              <div id="method-radios">
+                  <label class="radio-label" style="margin-left: 0;"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="morgan" checked="">
+                      Morgan Fingerprint
+                  </label>
+                  <label class="radio-label"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="fp2">
+                      FP2
+                  </label>
+                  <label class="radio-label"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="fp4">
+                      FP4
+                  </label>
+                  <label class="radio-label" id="radio-fitdock"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="fitdock">
+                      <a href="#" data-toggle="tooltip" data-html="true" style="color: #495057;" title="" data-original-title="Xiaocong Yang, 2022">
+                          FitDock
+                      </a>
+                  </label>
+                  <label class="radio-label" id="radio-rls"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="ls_r">  
+                      <a href="#" data-toggle="tooltip" data-html="true" style="color: #495057;" title="" data-original-title="2018">
+                          Rigid-LS-align
+                      </a>
+                  </label>
+                  <label class="radio-label" id="radio-fls"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="ls_f">
+                      <a href="#" data-toggle="tooltip" data-html="true" style="color: #495057;" title="" data-original-title="2018">
+                          Flexi-LS-align
+                      </a>
+                  </label>
+                  
+                  <label class="radio-label" id="radio-ligmate"> 
+                      <input type="radio" name="method-radio" id="method-radio" value="ligmate">
+                      <a href="#" data-toggle="tooltip" data-html="true" style="color: #495057;" title="" data-original-title="2020">
+                          LigMate
+                      </a>
+                  </label>
+                  
+              </div>
+          </form>
+          <div class="mb-3">
+            <form id="blinddock" enctype="multipart/form-data" class="form-control border-0 p-0" method="post" action="screen_blinddock.php" novalidate=""> <!-- More parameters -->
+                <div class="mb-2">
+                    <a class="btn btn-secondary btn-sm" data-toggle="collapse" href="#more-param" role="button" aria-expanded="false" aria-controls="more" id="more-param-btn">
+                     <strong>More parameters</strong>
+                    </a>
+                </div>
+                <div class="collapse" id="more-param">
+                    <div>
+                        
+                            <label for="output_number">Please enter the number of molecules to output after screening:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="output-number" name="output_number" value="20" onfocus="if (value =='20'){value =''}" onblur="if (value ==''){value='20'}" placesholder="output number" required="">
+                                <input type="text" style="display:none">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" onclick="def()">Default</span>
+                                </div>
+                            </div> 
+                            <small class="text-danger" id="output-number-error" style="display: none">
+                                Please enter a number smaller than 50
+                            </small>  <!-- output-number -->
+                        
+                    </div>    
+                </div></form>
+            
+          </div>
+
+          <div class="form-control border-0 p-0" id="email-form"> <!-- email -->
+              <label for="email"><strong>Please enter your email address:</strong></label>
+              <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required="" autofocus="" oninput="checkEmail(this.value)">
+              <small id="chkmsg" class="form-text text-muted">Your email will be used to receive the screening result. Mail may be sent to the trash can, please check it if the mail is missing.</small>
+              <div class="form-text text-danger" id="chkmsg"></div>
+          </div>
+
+
+          <form enctype="multipart/form-data" method="post" action="screen_blinddock.php" novalidate=""><!-- submit -->
+              <div class="d-flex flex-wrap justify-content-center" style="margin-top:1em;" id="butt_submit">
+                  <button type="button" name="submit" class="btn btn-primary" id="submit" disabled="true">Submit</button>
+              </div>
+          </form>
+
+          <div class="card text-center border-0" id="son">  
+              <div id="results" class="alert alert-secondary mt-4" role="alert">
+                  <span id="count_time"></span>
+                  <span id="status_txt"></span>
+                  <span id="result_txt"> 
+                      Results are sent via email.<br>
+                      Registed users can also get access to their records from their accounts. Please <a href="register.php">register</a> and <a href="login.php">log</a> in.
+                  </span>
+              </div>
+          </div> 
+      </div> <!-- card -->
+  </div>
+
+  
+    
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Institute</h3>
+                        <ul>
+                            <li><a href="#">Sapienza University</a></li>
+                            <li><a href="#">Tovelo University</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Chemistry Databases</h3>
+                        <ul>
+                            <li><a href="#">BindingDB</a></li>
+                            <li><a href="#">ChEMBL</a></li>
+                            <li><a href="#">DrugBank</a></li>
+                            <li><a href="#">PubChem</a></li>
+                            <li><a href="#">ZINC</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-4 item">
+                        <h3>Protein Databases</h3>
+                        <ul>
+                            <li><a href="#">Protein Data Bank RCSB</a></li>
+                            <li><a href="#">PDBe</a></li>
+                            <li><a href="#">PDBj</a></li>
+                            <li><a href="#">PDBsum</a></li>
+                        </ul>
+                    </div>
+               
+                  
+                </div>
+                <p class="copyright">Merve © 2023</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
